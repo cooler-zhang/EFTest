@@ -8,14 +8,18 @@ namespace EFTest
 {
     public class ProductService
     {
+        private readonly MyDbContext _ctx;
+
+        public ProductService(MyDbContext ctx)
+        {
+            this._ctx = ctx;
+        }
+
         public ProductEntity CreateProduct(ProductEntity product)
         {
-            using (var ctx = new MyDbContext())
-            {
-                product = ctx.Products.Add(product);
-                ctx.SaveChanges();
-                return product;
-            }
+            product = _ctx.Products.Add(product);
+            _ctx.SaveChanges();
+            return product;
         }
     }
 }

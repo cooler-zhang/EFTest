@@ -24,6 +24,16 @@ namespace EFTest
 
         public IDbSet<HotelEntity> Hotels { get; set; }
 
+        public MyDbContext(string dbName)
+            : base(dbName)
+        {
+        }
+
+        public MyDbContext(Func<string> dbFunc)
+            : base(dbFunc.Invoke())
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -49,14 +59,14 @@ namespace EFTest
                 .ToTable("HotelEntity");
         }
 
-        public void UpdateStudent()
+        public void ExecProcedure(string procedureName)
         {
             if (this.Database.Connection.State == ConnectionState.Closed)
                 this.Database.Connection.Open();
 
             var cmd = Database.Connection.CreateCommand();
 
-            cmd.CommandText = "UpdateStudent";
+            cmd.CommandText = procedureName;
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.CommandTimeout = 60 * 1000 * 30;
