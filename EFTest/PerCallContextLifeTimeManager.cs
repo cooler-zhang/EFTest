@@ -10,7 +10,12 @@ namespace EFTest
 {
     public class PerCallContextLifeTimeManager : LifetimeManager, ITypeLifetimeManager
     {
-        private string _key => string.Format("PerCallContextLifeTimeManager_{0}", Guid.NewGuid());
+        private readonly string _key = string.Empty;
+
+        public PerCallContextLifeTimeManager()
+        {
+            _key = string.Format("PerCallContextLifeTimeManager_{0}", Guid.NewGuid());
+        }
 
         public override object GetValue(ILifetimeContainer container = null)
         {

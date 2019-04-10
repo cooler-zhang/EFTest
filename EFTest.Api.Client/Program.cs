@@ -33,6 +33,7 @@ namespace EFTest.Api.Client
                     }
                 }
             });
+            Console.WriteLine();
             foreach (var item in dic)
             {
                 Console.WriteLine($"Result Url:{item.Key},Count:{item.Value}");

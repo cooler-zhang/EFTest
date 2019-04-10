@@ -35,7 +35,7 @@ namespace EFTest.Api
                 var host = HttpContext.Current.Request.Url.Host;
                 return host.IndexOf(".") > 0 ? host.Substring(0, host.IndexOf(".")) : host;
             });
-
+            //PerCallContextLifeTimeManager PerThreadLifetimeManager
             ContainerManager.Current.RegisterType<MyDbContext>(new PerCallContextLifeTimeManager(), new InjectionConstructor(resolveDBNameFunc));
             ContainerManager.Current.RegisterType<ClassRepository>();
             ContainerManager.Current.RegisterType<StudentRepository>();
