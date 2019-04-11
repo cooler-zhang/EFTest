@@ -13,7 +13,14 @@ namespace EFTest.Api.Client
     {
         static void Main(string[] args)
         {
-            var urls = new string[] { "http://mydbcontext.cooler.com:65149/student/create", "http://mydbcontext2.cooler.com:65149/student/create", "http://mydbcontext3.cooler.com:65149/student/create" };
+            var urls = new string[] {
+                "http://mydbcontext1.cooler.com:65149/student/create",
+                "http://mydbcontext2.cooler.com:65149/student/create",
+                "http://mydbcontext3.cooler.com:65149/student/create",
+                "http://mydbcontext4.cooler.com:65149/student/create",
+                "http://mydbcontext5.cooler.com:65149/student/create"
+            };
+
             var dic = new ConcurrentDictionary<string, int>();
             Parallel.For(0, 50, (index) =>
             {

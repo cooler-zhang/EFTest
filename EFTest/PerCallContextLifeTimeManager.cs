@@ -19,12 +19,12 @@ namespace EFTest
 
         public override object GetValue(ILifetimeContainer container = null)
         {
-            return CallContext.GetData(_key) ?? NoValue;
+            return CallContext.LogicalGetData(_key) ?? NoValue;
         }
 
         public override void SetValue(object newValue, ILifetimeContainer container = null)
         {
-            CallContext.SetData(_key, newValue);
+            CallContext.LogicalSetData(_key, newValue);
         }
 
         public override void RemoveValue(ILifetimeContainer container = null)

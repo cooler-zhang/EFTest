@@ -26,21 +26,5 @@ namespace EFTest
             _ctx.Classes.Remove(class1);
             _ctx.SaveChanges();
         }
-
-        public void SeedData()
-        {
-            ClassEntity class1 = new ClassEntity();
-            class1.Name = "小班";
-
-            ClassEntity class2 = new ClassEntity();
-            class2.Name = "中班";
-
-            ClassEntity class3 = new ClassEntity();
-            class3.Name = "大班";
-
-            _ctx.Classes.AddRange(new List<ClassEntity>() { class1, class2, class3 });
-
-            _ctx.SaveChanges();
-        }
     }
 }

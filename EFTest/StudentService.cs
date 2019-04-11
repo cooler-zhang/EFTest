@@ -17,11 +17,6 @@ namespace EFTest
             this._studentRepository = studentRepository;
         }
 
-        public void SeedData()
-        {
-            this._classRepository.SeedData();
-        }
-
         public void CreateStudent()
         {
             var class1 = _classRepository.Find(1);

@@ -14,7 +14,6 @@ namespace EFTest.Api.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            _testService.SeedData();
             return Content("Success");
         }
 
