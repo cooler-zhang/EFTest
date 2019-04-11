@@ -22,10 +22,10 @@ namespace EFTest.Api.Client
             };
 
             var dic = new ConcurrentDictionary<string, int>();
-            Parallel.For(0, 50, (index) =>
+            Parallel.For(0, 100, (index) =>
             {
                 var random = new Random();
-                var url = urls[random.Next(0, 3)];
+                var url = urls[random.Next(0, 5)];
                 var httpClient = new HttpClient();
                 using (var response = httpClient.GetAsync(url).Result)
                 {
@@ -41,7 +41,7 @@ namespace EFTest.Api.Client
                 }
             });
             Console.WriteLine();
-            foreach (var item in dic)
+            foreach (var item in dic.OrderBy(a => a.Key))
             {
                 Console.WriteLine($"Result Url:{item.Key},Count:{item.Value}");
             }

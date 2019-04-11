@@ -8,7 +8,7 @@ namespace EFTest.Api
     public class MigrationDbContext : MyDbContext
     {
         public MigrationDbContext()
-            :base("MyDbContext4")
+            :base("MyDbContext5")
         {
         }
     }
