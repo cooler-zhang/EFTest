@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity;
 
 namespace EFTest
 {
@@ -12,7 +13,7 @@ namespace EFTest
 
         public StudentRepository(MyDbContext ctx)
         {
-            this._ctx = ctx;
+            this._ctx = ContainerManager.Current.Resolve<MyDbContext>();
         }
 
         public StudentEntity Find(int id)
@@ -23,6 +24,11 @@ namespace EFTest
         public void Create(StudentEntity student)
         {
             _ctx.Students.Add(student);
+            _ctx.SaveChanges();
+        }
+
+        public void Modified(StudentEntity student)
+        {
             _ctx.SaveChanges();
         }
 

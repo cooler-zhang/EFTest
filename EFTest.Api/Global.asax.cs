@@ -32,11 +32,11 @@ namespace EFTest.Api
 
             var resolveDBNameFunc = new Func<string>(() =>
             {
-                var host = HttpContext.Current.Request.Url.Host;
+                var host = HttpContext.Current != null ? HttpContext.Current.Request.Url.Host : "localhost";
                 return host.IndexOf(".") > 0 ? host.Substring(0, host.IndexOf(".")) : host;
             });
             //PerCallContextLifeTimeManager PerThreadLifetimeManager
-            ContainerManager.Current.RegisterType<MyDbContext>(new PerCallContextLifeTimeManager(), new InjectionConstructor(resolveDBNameFunc));
+            ContainerManager.Current.RegisterType<MyDbContext>(new PerCallContextLifeTimeManager(nameof(MyDbContext)), new InjectionConstructor(resolveDBNameFunc));
             ContainerManager.Current.RegisterType<ClassRepository>();
             ContainerManager.Current.RegisterType<StudentRepository>();
             ContainerManager.Current.RegisterType<StudentService>();

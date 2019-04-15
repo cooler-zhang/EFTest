@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Unity;
 
-namespace EFTest.Api
+namespace EFTest
 {
     public class ContainerManager
     {

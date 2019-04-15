@@ -28,7 +28,7 @@ namespace EFTest
         public static void InitIoC()
         {
             _container = new UnityContainer();
-            _container.RegisterType<MyDbContext>(new PerCallContextLifeTimeManager());
+            _container.RegisterType<MyDbContext>(new PerCallContextLifeTimeManager(nameof(MyDbContext)));
             _container.RegisterType<ClassRepository>();
             _container.RegisterType<StudentRepository>();
             _container.RegisterType<StudentService>();

@@ -27,11 +27,13 @@ namespace EFTest
         public MyDbContext(string dbName)
             : base(dbName)
         {
+            System.Diagnostics.Debug.WriteLine($"DbContext:{Guid.NewGuid().ToString()}");
         }
 
         public MyDbContext(Func<string> dbFunc)
             : base(dbFunc.Invoke())
         {
+            System.Diagnostics.Debug.WriteLine($"DbContext:{Guid.NewGuid().ToString()}");
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -71,6 +73,11 @@ namespace EFTest
 
             cmd.CommandTimeout = 60 * 1000 * 30;
             var result = cmd.ExecuteNonQuery();
+        }
+
+        ~MyDbContext()
+        {
+            base.Dispose();
         }
     }
 }
