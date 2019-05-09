@@ -11,33 +11,41 @@ namespace EFTest
 {
     public class PerCallContextLifeTimeManager : LifetimeManager, ITypeLifetimeManager
     {
-        private string _key => string.Format($"PerCallContextLifeTimeManager_{Name}_{Thread.CurrentThread.ManagedThreadId}");
+        private string Key => string.Format("CallContextLifeTimeManager_{0}_{1}", SqlHelper.ConnectionStringKey, _serviceName);
 
-        public string Name { get; set; }
+        //private string Key = string.Format("CallContextLifeTimeManager_{0}_{1}", SqlHelper.ConnectionStringKey, Guid.NewGuid());
 
-        public PerCallContextLifeTimeManager(string name)
+
+        private readonly string _serviceName;
+
+        public PerCallContextLifeTimeManager(string serviceName = null)
         {
-            this.Name = name;
+            this._serviceName = string.IsNullOrWhiteSpace(serviceName) ? Guid.NewGuid().ToString() : serviceName;
         }
 
         public override object GetValue(ILifetimeContainer container = null)
         {
-            return CallContext.GetData(_key) ?? NoValue;
+            return CallContext.LogicalGetData(Key) ?? NoValue;
         }
 
         public override void SetValue(object newValue, ILifetimeContainer container = null)
         {
-            CallContext.SetData(_key, newValue);
+            CallContext.LogicalSetData(Key, newValue);
         }
 
         public override void RemoveValue(ILifetimeContainer container = null)
         {
-            CallContext.FreeNamedDataSlot(_key);
+            CallContext.FreeNamedDataSlot(Key);
         }
 
         protected override LifetimeManager OnCreateLifetimeManager()
         {
             return this;
         }
+    }
+
+    public class SqlHelper
+    {
+        public static string ConnectionStringKey { get; set; } = "Key";
     }
 }

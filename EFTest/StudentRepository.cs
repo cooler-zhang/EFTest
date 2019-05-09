@@ -9,7 +9,7 @@ namespace EFTest
 {
     public class StudentRepository
     {
-        private readonly MyDbContext _ctx;
+        public readonly MyDbContext _ctx;
 
         public StudentRepository(MyDbContext ctx)
         {

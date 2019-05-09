@@ -72,5 +72,18 @@ namespace EFTest.Api.Controllers
 
             return Content("Success");
         }
+
+        [HttpGet]
+        public ActionResult TestResolve2()
+        {
+            var repository = ContainerManager.Current.Resolve<StudentRepository>();
+            var repository2 = ContainerManager.Current.Resolve<ClassRepository>();
+            SqlHelper.ConnectionStringKey = "Key1";
+            var repository3 = ContainerManager.Current.Resolve<StudentRepository>();
+            var isEqualsRepository = repository == repository3;
+            var isEqualsDbContext = repository._ctx == repository2._ctx;
+            var isEqualsDbContext2 = repository._ctx == repository3._ctx;
+            return Content("Success");
+        }
     }
 }
